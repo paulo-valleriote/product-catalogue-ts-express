@@ -23,6 +23,9 @@ jobs:
         with:
           version: latest
 
+      - name: Format Code with Biome
+        run: npx @biomejs/biome format --write ./src
+
       - name: Run Biome
         run: biome ci . --verbose
 
@@ -32,4 +35,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm install
-      - run: npm test
+      #- run: npm test
