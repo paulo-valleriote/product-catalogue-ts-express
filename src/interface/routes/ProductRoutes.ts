@@ -12,9 +12,9 @@ import { GetProductById } from '@use-cases/products/get-by-id/GetProductById'
 import { SaveProduct } from '@use-cases/products/save/SaveProduct'
 import { UpdateProduct } from '@use-cases/products/update/UpdateProduct'
 
-import type { DataSource } from 'typeorm'
-import { cacheClient } from 'src'
 import { CacheHandler } from '@interfaces/cache/cacheHandler'
+import { cacheClient } from 'src'
+import type { DataSource } from 'typeorm'
 
 export class ProductRoutes {
 	static initialize(dataSource: DataSource) {

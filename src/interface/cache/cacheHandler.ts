@@ -1,5 +1,5 @@
-import type { ICacheHandler, ICacheResult } from './types/cacheHandler'
 import type { ICacheClient } from './types/cacheClient'
+import type { ICacheHandler, ICacheResult } from './types/cacheHandler'
 
 export class CacheHandler implements ICacheHandler {
 	private static instance: CacheHandler

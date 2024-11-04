@@ -1,12 +1,12 @@
-import { Product } from '@infrastructure/entity/orm/Product'
 import { BaseRepository } from '@domain/repositories/BaseRepository'
+import { Product } from '@infrastructure/entity/orm/Product'
 
+import type { IResultPagination } from '@domain/dto/database/ListResult'
 import type { ProductRepository } from '@domain/repositories/ProductRepository'
 import type { CreateProductDto } from '@infrastructure/dto/product/CreateProductDto'
-import type { UpdateProductDto } from '@infrastructure/dto/product/UpdateProductDto'
-import type { IResultPagination } from '@domain/dto/database/ListResult'
 import type { GetProductDto } from '@infrastructure/dto/product/GetProductDto'
-import type { SelectQueryBuilder, DataSource } from 'typeorm'
+import type { UpdateProductDto } from '@infrastructure/dto/product/UpdateProductDto'
+import type { DataSource, SelectQueryBuilder } from 'typeorm'
 
 export class OrmProductRepository
 	extends BaseRepository<Product>
