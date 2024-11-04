@@ -1,0 +1,79 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"ignore": [
+			"node_modules",
+			"dist",
+			"src/interface/database/migrations"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"attributePosition": "auto",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 80
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noStaticOnlyClass": "off",
+				"noUselessSwitchCase": "error",
+				"noForEach": "error",
+				"noBannedTypes": "error"
+			},
+			"style": {
+				"useForOf": "warn",
+				"useNumberNamespace": "error",
+				"noNegationElse": "error",
+				"noImplicitBoolean": "error"
+			},
+			"suspicious": {
+				"noDoubleEquals": "error",
+				"noThenProperty": "error",
+				"useIsArray": "error"
+			},
+			"correctness": {
+				"noConstructorReturn": "error",
+				"noInvalidConstructorSuper": "error",
+				"noInvalidBuiltinInstantiation": "error",
+				"noUnusedPrivateClassMembers": "error"
+			},
+			"performance": {
+				"noAccumulatingSpread": "error",
+				"noDelete": "error",
+				"noReExportAll": "error"
+			}
+		}
+	},
+	"javascript": {
+		"globals": ["Global1"],
+		"formatter": {
+			"quoteStyle": "single",
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"quoteProperties": "asNeeded",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all"
+		}
+	},
+	"json": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	}
+}
