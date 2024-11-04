@@ -24,7 +24,7 @@ jobs:
           version: latest
 
       - name: Run Biome
-        run: biome ci .
+        run: biome ci . --verbose
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
