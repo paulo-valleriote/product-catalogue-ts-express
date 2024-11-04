@@ -10,7 +10,15 @@
 		"ignore": [
 			"node_modules",
 			"dist",
-			"src/interface/database/migrations"
+			"src/interface/database/migrations",
+			".gitignore",
+			"package.json",
+			"TODO.md",
+			"docker-compose.yml",
+			".github",
+			".husky",
+			"tsconfig.json",
+			"nodemon.json"
 		]
 	},
 	"formatter": {
