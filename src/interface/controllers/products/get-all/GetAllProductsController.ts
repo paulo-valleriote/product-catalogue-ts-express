@@ -9,9 +9,9 @@ export class GetAllProductsController {
 
 		const products = await this.getAllProducts.execute(
 			page !== undefined ? Number(page) : 1,
-			limit !== undefined ? Number(limit) : 10
+			limit !== undefined ? Number(limit) : 10,
 		)
-		
+
 		res.json(products)
 	}
 }

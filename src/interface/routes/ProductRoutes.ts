@@ -12,7 +12,7 @@ import { GetProductById } from '@use-cases/products/get-by-id/GetProductById'
 import { SaveProduct } from '@use-cases/products/save/SaveProduct'
 import { UpdateProduct } from '@use-cases/products/update/UpdateProduct'
 
-import type{ DataSource } from 'typeorm'
+import type { DataSource } from 'typeorm'
 import { cacheClient } from 'src'
 import { CacheHandler } from '@interfaces/cache/cacheHandler'
 
@@ -21,12 +21,15 @@ export class ProductRoutes {
 		const router = Router()
 
 		const productRepository = new OrmProductRepository(dataSource)
-		const getAllProducts = new GetAllProducts(productRepository, CacheHandler.getInstance(cacheClient))
+		const getAllProducts = new GetAllProducts(
+			productRepository,
+			CacheHandler.getInstance(cacheClient),
+		)
 		const getProductById = new GetProductById(productRepository)
 		const saveProduct = new SaveProduct(productRepository)
 		const updateProduct = new UpdateProduct(productRepository)
 		const deleteProduct = new DeleteProductById(productRepository)
-		
+
 		router.get('/', (req, res) =>
 			new GetAllProductsController(getAllProducts).handle(req, res),
 		)

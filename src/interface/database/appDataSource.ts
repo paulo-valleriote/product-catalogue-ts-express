@@ -17,9 +17,9 @@ export const generateDataSource = async () => {
 
 	try {
 		await dataSource.initialize()
-		console.log("Data Source has been initialized!")
+		console.log('Data Source has been initialized!')
 	} catch (err) {
-		console.error("Error during Data Source initialization", err)
+		console.error('Error during Data Source initialization', err)
 	}
 
 	return dataSource

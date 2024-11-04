@@ -1,4 +1,4 @@
-import {createClient} from 'redis'
+import { createClient } from 'redis'
 import type { ICacheClient } from './types/cacheClient'
 
 export const generateCacheClient = async (): Promise<ICacheClient> => {

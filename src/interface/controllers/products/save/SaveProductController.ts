@@ -1,6 +1,6 @@
 import { DtoValidator } from '@infrastructure/dto/DtoValidator'
 
-import type{ CreateProductDto } from '@infrastructure/dto/product/CreateProductDto'
+import type { CreateProductDto } from '@infrastructure/dto/product/CreateProductDto'
 import type { SaveProduct } from '@use-cases/products/save/SaveProduct'
 import type { Request, Response } from 'express'
 

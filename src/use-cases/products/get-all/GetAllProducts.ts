@@ -4,11 +4,19 @@ import type { IResultPagination } from '@domain/dto/database/ListResult'
 import type { ICacheHandler } from '@interfaces/cache/types/cacheHandler'
 
 export class GetAllProducts {
-	constructor(private readonly productRepository: ProductRepository, private readonly cacheHandler: ICacheHandler) {}
+	constructor(
+		private readonly productRepository: ProductRepository,
+		private readonly cacheHandler: ICacheHandler,
+	) {}
 
-	async execute(page: number, limit: number): Promise<IResultPagination<GetProductDto>> {
+	async execute(
+		page: number,
+		limit: number,
+	): Promise<IResultPagination<GetProductDto>> {
 		if (this.cacheHandler !== undefined) {
-			const cachedProducts = await this.cacheHandler.get(`products:${page}:${limit}`)
+			const cachedProducts = await this.cacheHandler.get(
+				`products:${page}:${limit}`,
+			)
 			if (cachedProducts.data !== undefined) {
 				return JSON.parse(cachedProducts.data)
 			}
@@ -17,10 +25,12 @@ export class GetAllProducts {
 		const products = await this.productRepository.findAll(page, limit)
 
 		if (this.cacheHandler !== undefined) {
-			await this.cacheHandler.set(`products:${page}:${limit}`, JSON.stringify(products))
+			await this.cacheHandler.set(
+				`products:${page}:${limit}`,
+				JSON.stringify(products),
+			)
 		}
 
 		return products
 	}
 }
- 

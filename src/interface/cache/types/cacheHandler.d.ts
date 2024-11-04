@@ -5,7 +5,7 @@ export interface ICacheHandler {
 }
 
 export interface ICacheResult {
-  data?: string,
-  errorMessage?: string,
-  error?: boolean
+	data?: string
+	errorMessage?: string
+	error?: boolean
 }
