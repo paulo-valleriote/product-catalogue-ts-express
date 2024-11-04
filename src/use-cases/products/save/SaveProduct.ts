@@ -1,5 +1,5 @@
-import type { CreateProductDto } from '@infrastructure/dto/product/CreateProductDto'
 import type { ProductRepository } from '@domain/repositories/ProductRepository'
+import type { CreateProductDto } from '@infrastructure/dto/product/CreateProductDto'
 
 export class SaveProduct {
 	constructor(private readonly productRepository: ProductRepository) {}

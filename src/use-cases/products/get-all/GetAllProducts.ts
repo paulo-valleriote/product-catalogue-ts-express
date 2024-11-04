@@ -1,6 +1,6 @@
-import type { GetProductDto } from '@infrastructure/dto/product/GetProductDto'
-import type { ProductRepository } from '@domain/repositories/ProductRepository'
 import type { IResultPagination } from '@domain/dto/database/ListResult'
+import type { ProductRepository } from '@domain/repositories/ProductRepository'
+import type { GetProductDto } from '@infrastructure/dto/product/GetProductDto'
 import type { ICacheHandler } from '@interfaces/cache/types/cacheHandler'
 
 export class GetAllProducts {

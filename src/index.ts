@@ -1,16 +1,16 @@
+import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
-import cors from 'cors'
 
-import { ProductRoutes } from '@interfaces/routes/ProductRoutes'
-import { ErrorHandler } from '@interfaces/middleware/ErrorHandler'
-import setupSwagger from '@interfaces/docs/swagger'
-import { generateDataSource } from '@interfaces/database/appDataSource'
 import { generateCacheClient } from '@interfaces/cache/cacheClient'
+import { generateDataSource } from '@interfaces/database/appDataSource'
+import setupSwagger from '@interfaces/docs/swagger'
+import { ErrorHandler } from '@interfaces/middleware/ErrorHandler'
+import { ProductRoutes } from '@interfaces/routes/ProductRoutes'
 
+import type { ICacheClient } from '@interfaces/cache/types/cacheClient'
 import type { Express, Request, Response } from 'express'
 import type { DataSource } from 'typeorm'
-import type { ICacheClient } from '@interfaces/cache/types/cacheClient'
 
 dotenv.config()
 

@@ -30,9 +30,6 @@
 		"lineEnding": "lf",
 		"lineWidth": 80
 	},
-	"organizeImports": {
-		"enabled": true
-	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -58,7 +55,8 @@
 				"noConstructorReturn": "error",
 				"noInvalidConstructorSuper": "error",
 				"noInvalidBuiltinInstantiation": "error",
-				"noUnusedPrivateClassMembers": "error"
+				"noUnusedPrivateClassMembers": "error",
+				"noUnusedImports": "error"
 			},
 			"performance": {
 				"noAccumulatingSpread": "error",
