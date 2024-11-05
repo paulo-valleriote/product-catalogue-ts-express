@@ -1,4 +1,5 @@
 import type { IResultPagination } from '@domain/dto/database/ListResult'
+import type { IAuthenticationGetUserDto } from '@domain/dto/user/AuthenticationGetUserDto'
 import { BaseRepository } from '@domain/repositories/BaseRepository'
 import type { UserRepository } from '@domain/repositories/UserRepository'
 import type { CreateUserDto } from '@infrastructure/dto/user/CreateUserDto'
@@ -54,6 +55,18 @@ export class OrmUserRepository
 	async findByGoogleId(googleId: string): Promise<GetUserDto> {
 		const user = await this.queryBuilder
 			.where('user.googleId = :googleId', { googleId })
+			.getOne()
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		return user
+	}
+
+	async findByEmail(email: string): Promise<IAuthenticationGetUserDto> {
+		const user = await this.queryBuilder
+			.where('user.email = :email', { email })
 			.getOne()
 
 		if (!user) {

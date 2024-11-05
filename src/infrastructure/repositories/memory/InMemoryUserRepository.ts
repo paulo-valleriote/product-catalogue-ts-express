@@ -1,4 +1,5 @@
 import type { IResultPagination } from '@domain/dto/database/ListResult'
+import type { IAuthenticationGetUserDto } from '@domain/dto/user/AuthenticationGetUserDto'
 import type { IUser } from '@domain/entity/User'
 import type { UserRepository } from '@domain/repositories/UserRepository'
 import type { CreateUserDto } from '@infrastructure/dto/user/CreateUserDto'
@@ -40,6 +41,16 @@ export class InMemoryUserRepository implements UserRepository {
 
 	async findByGoogleId(googleId: string): Promise<GetUserDto> {
 		const user = this.users.find((user) => user.googleId === googleId)
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		return user
+	}
+
+	async findByEmail(email: string): Promise<IAuthenticationGetUserDto> {
+		const user = this.users.find((user) => user.email === email)
 
 		if (!user) {
 			throw new Error('User not found')
