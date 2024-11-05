@@ -7,6 +7,9 @@ import { generateDataSource } from '@interfaces/database/appDataSource'
 import setupSwagger from '@interfaces/docs/swagger'
 import { ErrorHandler } from '@interfaces/middleware/ErrorHandler'
 import { ProductRoutes } from '@interfaces/routes/ProductRoutes'
+import { SecurityRoutes } from '@interfaces/routes/SecurityRoutes'
+import { UserRoutes } from '@interfaces/routes/UserRoutes'
+import { PassportHandler } from '@interfaces/security/passport/passportHandler'
 
 import type { ICacheClient } from '@interfaces/cache/types/cacheClient'
 import type { Express, Request, Response } from 'express'
@@ -31,6 +34,11 @@ const startServer = async () => {
 		datasource = await generateDataSource()
 		cacheClient = await generateCacheClient()
 
+		const passportOauthHandler = new PassportHandler(datasource)
+		passportOauthHandler.initialize()
+
+		app.use('/auth', SecurityRoutes.initialize(passportOauthHandler))
+		app.use('/users', UserRoutes.initialize(datasource))
 		app.use('/products', ProductRoutes.initialize(datasource))
 
 		const errorHandler = new ErrorHandler()

@@ -5,5 +5,5 @@ export class UpdateUserDto implements IUpdateUserDto {
 	name!: string
 	email!: string
 	password!: string
-	passwordConfimation!: string
+	passwordConfirmation!: string
 }

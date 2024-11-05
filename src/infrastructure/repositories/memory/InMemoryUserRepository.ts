@@ -38,12 +38,23 @@ export class InMemoryUserRepository implements UserRepository {
 		return user
 	}
 
+	async findByGoogleId(googleId: string): Promise<GetUserDto> {
+		const user = this.users.find((user) => user.googleId === googleId)
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		return user
+	}
+
 	async save(user: CreateUserDto): Promise<void> {
 		const newUser = new UserInMemory(
 			UuidGenerator.generate(),
 			user.name,
 			user.email,
 			user.password,
+			user.googleId,
 		)
 
 		this.users.push(newUser)

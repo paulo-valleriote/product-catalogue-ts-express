@@ -51,6 +51,18 @@ export class OrmUserRepository
 		return user
 	}
 
+	async findByGoogleId(googleId: string): Promise<GetUserDto> {
+		const user = await this.queryBuilder
+			.where('user.googleId = :googleId', { googleId })
+			.getOne()
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		return user
+	}
+
 	async save(user: CreateUserDto): Promise<void> {
 		await this.queryBuilder
 			.insert()
@@ -58,6 +70,8 @@ export class OrmUserRepository
 			.values({
 				name: user.name,
 				email: user.email,
+				googleId: user.googleId,
+				password: user.password,
 			})
 			.execute()
 	}

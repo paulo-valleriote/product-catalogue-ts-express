@@ -7,6 +7,7 @@ export class UserInMemory extends BaseEntityInMemory implements IUser {
 		public name: string,
 		public email: string,
 		public password: string,
+		public googleId?: string,
 	) {
 		super(id, new Date(), undefined, undefined)
 	}

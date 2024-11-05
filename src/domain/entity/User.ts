@@ -4,4 +4,5 @@ export interface IUser extends IBaseEntity {
 	name: string
 	email: string
 	password: string
+	googleId?: string
 }

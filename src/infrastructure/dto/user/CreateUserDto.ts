@@ -4,4 +4,5 @@ export class CreateUserDto implements ICreateUserDto {
 	name!: string
 	email!: string
 	password!: string
+	googleId?: string
 }

@@ -5,7 +5,8 @@ import type { IUpdateUserDto } from '@domain/dto/user/UpdateUserDto'
 
 export interface UserRepository {
 	findAll(page: number, limit: number): Promise<IResultPagination<IGetUserDto>>
-	findById(id: string): Promise<IGetUserDto | null>
+	findById(id: string): Promise<IGetUserDto>
+	findByGoogleId(googleId: string): Promise<IGetUserDto>
 	save(user: ICreateUserDto): Promise<void>
 	update(user: IUpdateUserDto): Promise<void>
 	delete(id: string): Promise<void>

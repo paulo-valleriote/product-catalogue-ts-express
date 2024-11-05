@@ -12,4 +12,7 @@ export class User extends BaseEntity implements IUser {
 
 	@Column()
 	password!: string
+
+	@Column({ nullable: true })
+	googleId?: string
 }
