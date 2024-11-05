@@ -3,6 +3,8 @@ import { CreateUserWithGoogle } from '@use-cases/auth/google/CreateUserWithGoogl
 import { GetUserByGoogleId } from '@use-cases/auth/google/GetUserByGoogleId'
 import passport from 'passport'
 import GoogleStrategy from 'passport-google-oauth20'
+
+import type { GetUserDto } from '@infrastructure/dto/user/GetUserDto'
 import type { Profile } from 'passport-google-oauth20'
 import type { VerifyCallback } from 'passport-google-oauth20'
 import type { DataSource } from 'typeorm'
@@ -36,6 +38,15 @@ export class PassportHandler {
 	}
 
 	initialize() {
+		passport.serializeUser((user, done) => {
+			const { id } = user as unknown as GetUserDto
+			done(null, id)
+		})
+
+		passport.deserializeUser<string>((id, done) => {
+			this.getUserByGoogleId.execute(id).then((user) => done(null, user))
+		})
+
 		passport.use(
 			new GoogleStrategy.Strategy(
 				{
@@ -73,7 +84,9 @@ export class PassportHandler {
 				)
 			}
 
-			return this.createUserWithGoogle.execute(displayName, emails[0].value, id)
+			this.createUserWithGoogle
+				.execute(displayName, emails[0].value, id)
+				.then((newUser) => done(null, newUser))
 		})
 	}
 }

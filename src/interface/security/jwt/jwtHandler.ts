@@ -1,6 +1,11 @@
+import type {
+	IAuthTokenHandler,
+	ITokenPayload,
+	ITokenVerifyResult,
+} from '@domain/security/authTokenHandler'
 import jwt from 'jsonwebtoken'
 
-export class JwtHandler {
+export class JwtHandler implements IAuthTokenHandler {
 	private static getJWTKey(): string {
 		const JWT_KEY = process.env.JWT_KEY
 
@@ -11,11 +16,11 @@ export class JwtHandler {
 		return JWT_KEY
 	}
 
-	static sign(payload: JwtPayload): string {
+	sign(payload: ITokenPayload): string {
 		return jwt.sign(payload, JwtHandler.getJWTKey(), { expiresIn: '1h' })
 	}
 
-	static verify(token: string): JwtVerifyResult {
+	verify(token: string): ITokenVerifyResult {
 		try {
 			jwt.verify(token, JwtHandler.getJWTKey(), (err, decoded) => {
 				if (err) {
@@ -32,13 +37,4 @@ export class JwtHandler {
 			}
 		}
 	}
-}
-
-interface JwtPayload {
-	userId: string
-}
-
-interface JwtVerifyResult {
-	payload?: JwtPayload
-	error: boolean
 }

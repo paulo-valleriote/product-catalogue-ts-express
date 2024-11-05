@@ -76,8 +76,8 @@ export class OrmUserRepository
 		return user
 	}
 
-	async save(user: CreateUserDto): Promise<void> {
-		await this.queryBuilder
+	async save(user: CreateUserDto): Promise<GetUserDto> {
+		const createdUser = await this.queryBuilder
 			.insert()
 			.into(User)
 			.values({
@@ -87,6 +87,14 @@ export class OrmUserRepository
 				password: user.password,
 			})
 			.execute()
+
+		return {
+			id: createdUser.identifiers[0].id,
+			name: createdUser.raw[0].name,
+			email: createdUser.raw[0].email,
+			googleId: createdUser.raw[0].googleId,
+			createdAt: createdUser.raw[0].createdAt,
+		}
 	}
 
 	async update(user: UpdateUserDto): Promise<void> {

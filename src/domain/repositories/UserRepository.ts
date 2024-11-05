@@ -9,7 +9,7 @@ export interface UserRepository {
 	findById(id: string): Promise<IGetUserDto>
 	findByEmail(email: string): Promise<IAuthenticationGetUserDto>
 	findByGoogleId(googleId: string): Promise<IGetUserDto>
-	save(user: ICreateUserDto): Promise<void>
+	save(user: ICreateUserDto): Promise<IGetUserDto>
 	update(user: IUpdateUserDto): Promise<void>
 	delete(id: string): Promise<void>
 }

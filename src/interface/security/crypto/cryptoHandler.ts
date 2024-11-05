@@ -1,7 +1,8 @@
 import crypto from 'node:crypto'
+import type { ICryptoHandler } from '@domain/security/cryptoHandler'
 
-export class CryptoHandler {
-	static encrypt(value: string): string {
+class CryptoHandler implements ICryptoHandler {
+	encrypt(value: string): string {
 		const salt = crypto.randomBytes(16).toString('hex')
 		const hash = crypto
 			.pbkdf2Sync(value, salt, 10000, 64, 'sha512')
@@ -10,7 +11,7 @@ export class CryptoHandler {
 		return `${salt}:${hash}`
 	}
 
-	static validate(value: string, encryptedValue: string) {
+	validate(value: string, encryptedValue: string): boolean {
 		const [salt, hash] = encryptedValue.split(':')
 
 		const previousHashBuffer = Buffer.from(hash)
@@ -19,3 +20,5 @@ export class CryptoHandler {
 		return crypto.timingSafeEqual(previousHashBuffer, checkHashBuffer)
 	}
 }
+
+export default new CryptoHandler()
