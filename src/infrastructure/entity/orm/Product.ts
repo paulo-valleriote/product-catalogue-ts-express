@@ -1,11 +1,9 @@
 import type { IProduct } from '@domain/entity/Product'
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity } from 'typeorm'
+import { BaseEntity } from './BaseEntity'
 
 @Entity()
-export class Product implements IProduct {
-	@PrimaryGeneratedColumn('uuid')
-	id!: string
-
+export class Product extends BaseEntity implements IProduct {
 	@Column()
 	name!: string
 

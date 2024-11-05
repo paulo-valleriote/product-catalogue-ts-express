@@ -1,9 +1,12 @@
 import type { IProduct } from '@domain/entity/Product'
+import { BaseEntityInMemory } from './BaseEntityInMemory'
 
-export class ProductInMemory implements IProduct {
+export class ProductInMemory extends BaseEntityInMemory implements IProduct {
 	constructor(
-		public id: string,
+		id: string,
 		public name: string,
 		public price: number,
-	) {}
+	) {
+		super(id, new Date(), undefined, undefined)
+	}
 }

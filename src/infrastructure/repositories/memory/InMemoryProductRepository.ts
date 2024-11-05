@@ -47,8 +47,10 @@ export class InMemoryProductRepository implements ProductRepository {
 	}
 
 	async update(product: UpdateProductDto): Promise<void> {
-		const index = this.products.findIndex((p) => p.id === product.id)
-		this.products[index] = product
+		const { id, ...data } = product
+
+		const index = this.products.findIndex((p) => p.id === id)
+		this.products[index] = { ...this.products[index], ...data }
 	}
 
 	async delete(id: string): Promise<void> {

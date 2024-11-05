@@ -30,6 +30,7 @@ export class OrmProductRepository
 			id: product.id,
 			name: product.name,
 			price: product.price,
+			createdAt: product.createdAt,
 		}))
 
 		return {
@@ -55,6 +56,7 @@ export class OrmProductRepository
 			id: product.id,
 			name: product?.name,
 			price: product?.price,
+			createdAt: product.createdAt,
 		}
 	}
 
