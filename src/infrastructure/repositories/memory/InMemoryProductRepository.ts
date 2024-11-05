@@ -1,6 +1,5 @@
-import { v4 as uuid } from 'uuid'
-
 import { ProductInMemory } from '@infrastructure/entity/memory/ProductInMemory'
+import { UuidGenerator } from '@interfaces/database/uuidGenerator'
 
 import type { IResultPagination } from '@domain/dto/database/ListResult'
 import type { IProduct } from '@domain/entity/Product'
@@ -41,7 +40,11 @@ export class InMemoryProductRepository implements ProductRepository {
 	}
 
 	async save(product: CreateProductDto): Promise<void> {
-		const newProduct = new ProductInMemory(uuid(), product.name, product.price)
+		const newProduct = new ProductInMemory(
+			UuidGenerator.generate(),
+			product.name,
+			product.price,
+		)
 
 		this.products.push(newProduct)
 	}

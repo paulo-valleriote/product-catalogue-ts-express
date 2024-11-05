@@ -5,7 +5,7 @@ import type { CreateUserDto } from '@infrastructure/dto/user/CreateUserDto'
 import type { GetUserDto } from '@infrastructure/dto/user/GetUserDto'
 import type { UpdateUserDto } from '@infrastructure/dto/user/UpdateUserDto'
 import { UserInMemory } from '@infrastructure/entity/memory/UserInMemory'
-import { v4 as uuid } from 'uuid'
+import { UuidGenerator } from '@interfaces/database/uuidGenerator'
 
 export class InMemoryUserRepository implements UserRepository {
 	private users: IUser[] = []
@@ -40,7 +40,7 @@ export class InMemoryUserRepository implements UserRepository {
 
 	async save(user: CreateUserDto): Promise<void> {
 		const newUser = new UserInMemory(
-			uuid(),
+			UuidGenerator.generate(),
 			user.name,
 			user.email,
 			user.password,
