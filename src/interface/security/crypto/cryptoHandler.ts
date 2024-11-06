@@ -13,11 +13,11 @@ class CryptoHandler implements ICryptoHandler {
 
 	validate(value: string, encryptedValue: string): boolean {
 		const [salt, hash] = encryptedValue.split(':')
+		const checkHash = crypto
+			.pbkdf2Sync(value, salt, 10000, 64, 'sha512')
+			.toString('hex')
 
-		const previousHashBuffer = Buffer.from(hash)
-		const checkHashBuffer = crypto.pbkdf2Sync(value, salt, 10000, 64, 'sha512')
-
-		return crypto.timingSafeEqual(previousHashBuffer, checkHashBuffer)
+		return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(checkHash))
 	}
 }
 

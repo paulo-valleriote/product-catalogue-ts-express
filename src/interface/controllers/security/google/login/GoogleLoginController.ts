@@ -6,5 +6,6 @@ export class GoogleLoginController {
 
 	async handle(req: Request, res: Response) {
 		this.googleSignIn.execute()
+		res.status(200).send()
 	}
 }

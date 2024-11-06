@@ -13,6 +13,7 @@ import { UserRoutes } from '@interfaces/routes/UserRoutes'
 import { PassportHandler } from '@interfaces/security/passport/passportHandler'
 
 import type { ICacheClient } from '@interfaces/cache/types/cacheClient'
+import { AuthHandler } from '@interfaces/middleware/security/AuthHandler'
 import type { Express, Request, Response } from 'express'
 import passport from 'passport'
 import type { DataSource } from 'typeorm'
@@ -26,6 +27,7 @@ const port = process.env.PORT || 3000
 // Setup middlewares
 app.use(cors())
 app.use(express.json())
+setupSwagger(app)
 
 // Set cookie duration and encryption key
 app.use(
@@ -49,19 +51,25 @@ let datasource: DataSource
 let cacheClient: ICacheClient
 const startServer = async () => {
 	try {
+		const authHandler = new AuthHandler()
+		const errorHandler = new ErrorHandler()
+
 		datasource = await generateDataSource()
 		cacheClient = await generateCacheClient()
 
 		const passportOauthHandler = new PassportHandler(datasource)
 		passportOauthHandler.initialize()
 
-		app.use('/auth', SecurityRoutes.initialize(passportOauthHandler))
+		app.use(
+			'/auth',
+			SecurityRoutes.initialize(datasource, passportOauthHandler),
+		)
+		app.use(authHandler.handle)
+
 		app.use('/users', UserRoutes.initialize(datasource))
 		app.use('/products', ProductRoutes.initialize(datasource))
 
-		const errorHandler = new ErrorHandler()
 		app.use(errorHandler.handle)
-		setupSwagger(app)
 
 		app.listen(port, () => {
 			console.log(`Server is running on port ${port}`)
