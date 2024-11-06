@@ -85,7 +85,11 @@ export class PassportHandler {
 			}
 
 			this.createUserWithGoogle
-				.execute(displayName, emails[0].value, id)
+				.execute({
+					name: displayName,
+					email: emails[0].value,
+					googleId: id,
+				})
 				.then((newUser) => done(null, newUser))
 		})
 	}

@@ -103,7 +103,7 @@ export class OrmUserRepository
 		await this.queryBuilder
 			.update(User)
 			.set({
-				name: data.email,
+				name: data.name,
 				email: data.email,
 				password: data.password,
 			})

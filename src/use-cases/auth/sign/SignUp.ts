@@ -1,5 +1,10 @@
+import type { SaveUser } from '@use-cases/users/save/SaveUser'
+import type { SignUpDto } from './types/Sign'
+
 export class SignUp {
-	async execute(): Promise<void> {
-		throw new Error('Not implemented')
+	constructor(private readonly saveUser: SaveUser) {}
+
+	async execute(dto: SignUpDto): Promise<void> {
+		await this.saveUser.execute(dto)
 	}
 }

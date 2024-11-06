@@ -1,15 +1,14 @@
 import type { UserRepository } from '@domain/repositories/UserRepository'
 import type { GetUserDto } from '@infrastructure/dto/user/GetUserDto'
 import CryptoHandler from '@interfaces/security/crypto/cryptoHandler'
+import type { GoogleSignUpDto } from './types/GoogleSign'
 
 export class CreateUserWithGoogle {
 	constructor(private readonly userRepository: UserRepository) {}
 
-	async execute(
-		name: string,
-		email: string,
-		googleId: string,
-	): Promise<GetUserDto> {
+	async execute(dto: GoogleSignUpDto): Promise<GetUserDto> {
+		const { name, email, googleId } = dto
+
 		const user = await this.userRepository.save({
 			name,
 			email,
